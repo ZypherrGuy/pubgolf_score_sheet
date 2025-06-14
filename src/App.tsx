@@ -1,34 +1,62 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// src/App.tsx
+import React, { useState, useEffect } from 'react'
+import ScoreTable from './components/ScoreTable'
+import type { TeamScore } from './types/score'
+import { loadScores, saveScores } from './utils/localStorage'
+
+// === EDIT THESE TO YOUR ACTUAL TEAM NAMES ===
+const TEAM_NAMES = [
+  'Bogey Bandits',
+  'Par Pursuers',
+  'Green Machines',
+  'Hole-in-Ones',
+  'Fairway Flyers',
+  'Birdie Brigade',
+  'Eagle Enthusiasts',
+]
+
+const HOLE_COUNT = 9
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [teams, setTeams] = useState<TeamScore[]>(() => {
+    const saved = loadScores()
+    if (saved) return saved
+    return TEAM_NAMES.map(name => ({
+      teamName: name,
+      holes: Array.from({ length: HOLE_COUNT }, () => ({ score: 0, penalty: 0 })),
+    }))
+  })
+
+  useEffect(() => {
+    saveScores(teams)
+  }, [teams])
+
+  const updateHole = (
+    teamIdx: number,
+    holeIdx: number,
+    field: 'score' | 'penalty',
+    value: number
+  ) => {
+    setTeams(prev =>
+      prev.map((team, t) =>
+        t !== teamIdx
+          ? team
+          : {
+              ...team,
+              holes: team.holes.map((h, hI) =>
+                hI !== holeIdx ? h : { ...h, [field]: value }
+              ),
+            }
+      )
+    )
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div>
+      <h1>Pub Golf Scorecard</h1>
+      <p>{teams.length} teams × {HOLE_COUNT} holes • Auto-saved</p>
+      <ScoreTable teams={teams} updateHole={updateHole} />
+    </div>
   )
 }
 

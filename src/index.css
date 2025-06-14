@@ -25,9 +25,11 @@ a:hover {
 body {
   margin: 0;
   display: flex;
+  font-family: sans-serif;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  padding: 1rem;
 }
 
 h1 {
@@ -65,4 +67,33 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+input {
+  width: 3rem;
+}
+
+.leader {
+  background-color: #d4edda; /* light green */
+}
+
+.last {
+  background-color: #f8d7da; /* light red */
+}
+
+/* new: zero scores */
+.zero {
+  background-color: #f0f0f0; /* light grey */
 }
