@@ -6,13 +6,13 @@ import { loadScores, saveScores } from './utils/localStorage'
 
 // === EDIT THESE TO YOUR ACTUAL TEAM NAMES ===
 const TEAM_NAMES = [
-  'Bogey Bandits',
-  'Par Pursuers',
-  'Green Machines',
-  'Hole-in-Ones',
-  'Fairway Flyers',
-  'Birdie Brigade',
-  'Eagle Enthusiasts',
+  'Suck Tuggers',
+  'Puff Pussies',
+  'Leprcunts',
+  'Two Guys One Cup',
+  'Jizzters',
+  'Cooked Cocks',
+  'Pineapple Predators',
 ]
 
 const HOLE_COUNT = 9
@@ -54,7 +54,6 @@ function App() {
   return (
     <div>
       <h1>Pub Golf Scorecard</h1>
-      <p>{teams.length} teams × {HOLE_COUNT} holes • Auto-saved</p>
       <ScoreTable teams={teams} updateHole={updateHole} />
     </div>
   )
