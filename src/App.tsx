@@ -10,7 +10,6 @@ const TEAM_NAMES = [
   'Puff Pussies',
   'Leprcunts',
   'Two Guys One Cup',
-  'Jizzters',
   'Cooked Cocks',
   'Pineapple Predators',
 ]
