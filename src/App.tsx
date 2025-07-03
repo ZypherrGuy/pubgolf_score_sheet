@@ -8,7 +8,7 @@ import { loadScores, saveScores } from './utils/localStorage'
 const TEAM_NAMES = [
   'Suck Tuggers',
   'Puff Pussies',
-  'Leprcunts',
+  'The Leprcunts',
   'Two Guys One Cup',
   'Cooked Cocks',
   'Pineapple Predators',
